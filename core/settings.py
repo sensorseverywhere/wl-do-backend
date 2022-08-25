@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import environ
 import os
+from datetime import timedelta
 from pathlib import Path
 
 env = environ.Env()
@@ -32,6 +33,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+DOMAIN = ('localhost:3000') 
+SITE_NAME = ('auth_test') 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +50,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "djoser",
-
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     "accounts",
 ]
 
@@ -110,7 +116,12 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_TOKEN_CLASSES': (
+        'rest_framework_simplejwt.tokens.AccessToken',
+    )
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -177,6 +188,7 @@ DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {
