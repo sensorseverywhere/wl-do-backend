@@ -53,5 +53,9 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name
 
+    def check_email(self):
+        email_exists = UserAccount.models.filter(email=self.email)
+        return self.email
+
     def __str__(self):
         return self.email
