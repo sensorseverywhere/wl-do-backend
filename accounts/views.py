@@ -16,10 +16,8 @@ class CheckEmail(APIView):
         email = request.GET.get('email')
         user = UserAccount.objects.filter(email=email)
         if user:
-            print('Email exists')
-            return Response('Email exists')
+            return Response(True)
         else:
-            print('Welcome aboard')
-            return Response('Welcome aboard!')
+            return Response(False)
 
 

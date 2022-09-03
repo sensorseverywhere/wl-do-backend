@@ -9,28 +9,26 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import environ
+
 import os
 from datetime import timedelta
 from pathlib import Path
 
-env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# WITHOUT DOCKER
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+SECRET_KEY="581)xq&4cgf7ej7!_m8xl^9ly1-kp*7frni+blz4(z^tv&435r"
+DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1 [::1]"
+DEBUG=1
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+# DOCKER 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+# DEBUG = int(os.environ.get("DEBUG", default=0))
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 DOMAIN = ('localhost:3000') 
@@ -95,14 +93,30 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DOCKER
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+#         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+#         "USER": os.environ.get("SQL_USER", "user"),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+#         "HOST": os.environ.get("SQL_HOST", "localhost"),
+#         "PORT": os.environ.get("SQL_PORT", "5432"),
+#     }
+# }
+
+
+# WITHOUT DOCKER
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "auth_system",
         "USER": "wade",
-        "PASSWORD": "Qqqqqq!1",
+        "PASSWORD": "cANDg2011",
         "HOST": "localhost",
-        "PORT": '5433'
+        "PORT": "5433",
     }
 }
 
