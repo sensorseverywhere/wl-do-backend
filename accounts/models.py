@@ -23,7 +23,17 @@ class UserAccountManager(BaseUserManager):
 
         return self._create_user(email, name, password, **extra_fields)
 
-    
+
+    def create_staff_user(self, email, name, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', False)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Staff user must have is_staff=True.')
+
+        return self._create_user(email, name, password, **extra_fields)       
+
+
     def create_superuser(self, email, name, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -45,7 +55,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name', 'is_staff']
 
     def get_full_name(self):
         return self.name

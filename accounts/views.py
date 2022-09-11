@@ -15,6 +15,7 @@ class CheckEmail(APIView):
     def get(self, request, format=None):
         email = request.GET.get('email')
         user = UserAccount.objects.filter(email=email)
+        print('USER: ', user)
         if user:
             return Response(True)
         else:
