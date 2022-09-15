@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
 from rest_framework.response import Response
 from .models import UserAccount
@@ -18,7 +18,30 @@ class CheckEmail(APIView):
             return Response(False)
 
 
-class UserAccountViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = UserAccount.objects.all()
-    serializer_class = UserAccountSerializer
+class ListUserAccounts(APIView):
+    permission_classes = [IsAdminUser]
+    def get(self, request):
+        users = UserAccount.objects.all()
+        serializer = UserAccountSerializer(users, many=True)
+        return Response(serializer.data)
+
+
+class DeleteUserAccount(APIView):
+    permission_classes = [IsAdminUser]
+    def delete(self, request):
+        user = UserAccount.objects.get(id=request.id)
+        serializer = UserAccountSerializer
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UpdateUserAccount(APIView):
+    permission_classes = [IsAdminUser]
+    def update(self, request, *args, **kwargs):
+        data = request.DATA
+        qs = UserAccount.objects.filter(id=data.id)
+        serializer = UserAccountSerializer(qs, data=data, many=True)
+        if serializer.is_valid():
+           serializer.save()
+
+           return Response(serializer.data) 
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -1,12 +1,11 @@
 from django.urls import include, path
-from rest_framework import routers
 
-from .views import CheckEmail, UserAccountViewSet
 
-router = routers.DefaultRouter()
-router.register(r'users', UserAccountViewSet)
+from .views import CheckEmail, ListUserAccounts, DeleteUserAccount
+
 
 urlpatterns = [
     path('users/check_email/', CheckEmail.as_view(), name="check_email"),
-    path('', include(router.urls)),
+    path('users/', ListUserAccounts.as_view(), name="list-users"),
+    path('users/delete/<int:pk>/', DeleteUserAccount.as_view(), name="delete_user"),
 ]
