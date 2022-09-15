@@ -28,10 +28,11 @@ class ListUserAccounts(APIView):
 
 class DeleteUserAccount(APIView):
     permission_classes = [IsAdminUser]
-    def delete(self, request):
-        user = UserAccount.objects.get(id=request.id)
+    def delete(self, request, id):
+        user = UserAccount.objects.get(id=id)
+        user.delete()
         serializer = UserAccountSerializer
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('User deleted')
 
 
 class UpdateUserAccount(APIView):
