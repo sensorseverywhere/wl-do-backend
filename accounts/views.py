@@ -37,12 +37,17 @@ class DeleteUserAccount(APIView):
 
 class UpdateUserAccount(APIView):
     permission_classes = [IsAdminUser]
-    def update(self, request, *args, **kwargs):
-        data = request.DATA
-        qs = UserAccount.objects.filter(id=data.id)
-        serializer = UserAccountSerializer(qs, data=data, many=True)
+
+    def get_object(self, id):
+        return UserAccount.objects.get(pk=id)
+
+    def patch(self, request, id):
+        user = self.get_object(id)
+        print(user)
+        serializer = UserAccountSerializer(user, data=request.data, partial=True)
+
         if serializer.is_valid():
            serializer.save()
 
            return Response(serializer.data) 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('User updated')
