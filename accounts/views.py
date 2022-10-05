@@ -43,7 +43,6 @@ class UpdateUserAccount(APIView):
 
     def patch(self, request, id):
         user = self.get_object(id)
-        print(user)
         serializer = UserAccountSerializer(user, data=request.data, partial=True)
 
         if serializer.is_valid():

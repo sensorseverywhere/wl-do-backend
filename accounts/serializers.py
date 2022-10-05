@@ -16,7 +16,7 @@ class UserCreateSerialzer(UserCreateSerializer):
 
 
 class UserAccountSerializer(serializers.ModelSerializer):
-    print('called')
+
     class Meta:
         model = UserAccount
         fields = ('id', 'name', 'email', 'is_staff')
