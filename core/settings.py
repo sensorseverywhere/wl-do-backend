@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # "debug_toolbar",
 
-    "accounts",
+    "accounts.apps.AccountsConfig",
+    "content.apps.ContentConfig",
+    "payments.apps.PaymentsConfig",
 ]
 
 MIDDLEWARE = [
