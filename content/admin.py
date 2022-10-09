@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import ContentType, ContentTypeImage, NewsItem, Story
+from .models import Content, ContentImage, NewsItem, Story
 
 
-class ContentTypeAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'author', 'page_name', 'title', 'tags', 'content')
-    list_filter = ('page_name', 'active',)
-    list_editable = ('page_name', 'title', 'tags', 'content')
+class ContentAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'author', 'name', 'title', 'type', 'content')
+    list_filter = ('name', 'active',)
+    list_editable = ('name', 'title', 'type', 'content')
     list_display_links = None
     search_fields = ('title',)
 
@@ -18,6 +18,6 @@ class StoryAdmin(admin.ModelAdmin):
     readonly_fields = ('votes',)
 
 
-admin.site.register(ContentType, ContentTypeAdmin)
-admin.site.register(ContentTypeImage)
+admin.site.register(Content, ContentAdmin)
+admin.site.register(ContentImage)
 admin.site.register(NewsItem)

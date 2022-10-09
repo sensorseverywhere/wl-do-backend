@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 
-class ContentType(models.Model):
+class Content(models.Model):
 
     TYPES = (
         ('PAGE', 'Page'),
@@ -11,8 +11,8 @@ class ContentType(models.Model):
     )
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='content')
-    tags =  models.CharField(choices=TYPES, default='Page', max_length=10)
-    page_name = models.CharField(max_length=100)
+    type =  models.CharField(choices=TYPES, default='Page', max_length=10)
+    name = models.CharField(max_length=100)
     title = models.CharField(max_length=100, unique=True)
     content = models.TextField()
     active = models.BooleanField(default=False)
@@ -26,8 +26,8 @@ class ContentType(models.Model):
         return (self.title)
 
 
-class ContentTypeImage(models.Model):
-    cb = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+class ContentImage(models.Model):
+    cb = models.ForeignKey(Content, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="images")
 
     def __str__(self):
