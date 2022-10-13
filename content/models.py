@@ -24,6 +24,9 @@ class Content(models.Model):
 
     def natural_key(self):
         return (self.title)
+    
+    def get_all_by_author_name(self):
+        return self.author
 
 
 class ContentImage(models.Model):
