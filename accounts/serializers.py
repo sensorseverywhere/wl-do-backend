@@ -16,4 +16,5 @@ class UserCreateSerialzer(UserCreateSerializer):
 class UserAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ('id', 'name', 'email', 'is_staff')
+        # fields = ('id', 'name', 'email', 'is_staff')
+        exclude=('password',)

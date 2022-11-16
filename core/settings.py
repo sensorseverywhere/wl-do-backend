@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     # "debug_toolbar",
 
     "accounts.apps.AccountsConfig",
-    "content.apps.ContentConfig",
+    # "content.apps.ContentConfig",
     "payments.apps.PaymentsConfig",
 ]
 
@@ -70,7 +70,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
+    "http://localhost:8009",
     "http://localhost:3000"
 ]
 CORS_ORIGIN_ALLOW_ALL = False
@@ -83,7 +83,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'build')],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -104,30 +104,32 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # DOCKER
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-#         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-#         "USER": os.environ.get("SQL_USER", "user"),
-#         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-#         "HOST": os.environ.get("SQL_HOST", "localhost"),
-#         "PORT": os.environ.get("SQL_PORT", "5432"),
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
+    }
+}
 
 
 # WITHOUT DOCKER
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "auth_system",
-        "USER": "wade",
-        "PASSWORD": "cANDg2011",
-        "HOST": "localhost",
-        "PORT": "5433",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "auth_system",
+#         "USER": "wade",
+#         "PASSWORD": "cANDg2011",
+#         "HOST": "localhost",
+#         "PORT": "5433",
+#     }
+# }
+
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -228,4 +230,3 @@ DJOSER = {
 
 }
 
-AUTH_USER_MODEL = 'accounts.UserAccount'
