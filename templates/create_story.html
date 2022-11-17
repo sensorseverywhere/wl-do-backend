@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Story{% endblock title %}
+
+{% block content %}
+<h1>Create stories for {{ author.name }}</h1>
+<button type="button" hx-get="{% url 'create-story-form' %}" hx-target="#storyforms" hx-swap="beforeend">
+    Add form
+</button>
+
+<div id="storyforms"></div>
+
+{% for story in stories %}
+
+{% include "stories/story_detail.html" %}
+
+{% endfor %}
+
+{% endblock content %}

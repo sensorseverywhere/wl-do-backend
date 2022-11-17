@@ -18,11 +18,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# WITHOUT DOCKER
 
-SECRET_KEY="581)xq&4cgf7ej7!_m8xl^9ly1-kp*7frni+blz4(z^tv&435r"
-DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1 [::1] squid-app-4jfu8.ondigitalocean.app"
-DEBUG=1
+SECRET_KEY = os.getenv('SECRET_KEY', 'please-change-me')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+
 
 DOMAIN = ('localhost:3000') 
 SITE_NAME = ('auth_test') 
@@ -45,11 +45,14 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # "debug_toolbar",
 
-    "accounts",
+    "accounts.apps.AccountsConfig",
+    # "content.apps.ContentConfig",
+    "payments.apps.PaymentsConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -61,16 +64,20 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
+    "http://localhost:8009",
     "http://localhost:3000"
 ]
+CORS_ORIGIN_ALLOW_ALL = False
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'build')],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -98,6 +105,8 @@ DATABASES = {
         "PORT": "5433",
     }
 }
+
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -160,15 +169,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 INTERNAL_IPS = [
     '127.0.0.1'
 ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -198,4 +208,3 @@ DJOSER = {
 
 }
 
-AUTH_USER_MODEL = 'accounts.UserAccount'
