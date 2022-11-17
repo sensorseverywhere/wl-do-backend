@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # WITHOUT DOCKER
 
 SECRET_KEY="581)xq&4cgf7ej7!_m8xl^9ly1-kp*7frni+blz4(z^tv&435r"
-DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1 [::1]"
+DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1 [::1] squid-app-4jfu8.ondigitalocean.app"
 DEBUG=1
 
 # DOCKER 
