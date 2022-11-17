@@ -104,30 +104,30 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # DOCKER
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5433"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+#         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+#         "USER": os.environ.get("SQL_USER", "user"),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+#         "HOST": os.environ.get("SQL_HOST", "localhost"),
+#         "PORT": os.environ.get("SQL_PORT", "5433"),
+#     }
+# }
 
 
 # WITHOUT DOCKER
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "auth_system",
-#         "USER": "wade",
-#         "PASSWORD": "cANDg2011",
-#         "HOST": "localhost",
-#         "PORT": "5433",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "auth_system",
+        "USER": "wade",
+        "PASSWORD": "cANDg2011",
+        "HOST": "localhost",
+        "PORT": "5433",
+    }
+}
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
