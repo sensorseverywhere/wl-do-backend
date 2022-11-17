@@ -14,10 +14,6 @@ class UserCreateSerialzer(UserCreateSerializer):
 
 
 class UserAccountSerializer(serializers.ModelSerializer):
-<<<<<<< HEAD
-
-=======
->>>>>>> 005af2dc2f6e356d0dfcc5395dfd316e6836a514
     class Meta:
         model = UserAccount
         # fields = ('id', 'name', 'email', 'is_staff')
