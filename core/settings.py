@@ -24,13 +24,6 @@ SECRET_KEY="581)xq&4cgf7ej7!_m8xl^9ly1-kp*7frni+blz4(z^tv&435r"
 DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1 [::1] squid-app-4jfu8.ondigitalocean.app"
 DEBUG=1
 
-# DOCKER 
-
-# SECRET_KEY = os.environ.get("SECRET_KEY")
-# DEBUG = int(os.environ.get("DEBUG", default=0))
-# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
-
-
 DOMAIN = ('localhost:3000') 
 SITE_NAME = ('auth_test') 
 
@@ -91,23 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DOCKER
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-#         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-#         "USER": os.environ.get("SQL_USER", "user"),
-#         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-#         "HOST": os.environ.get("SQL_HOST", "localhost"),
-#         "PORT": os.environ.get("SQL_PORT", "5432"),
-#     }
-# }
 
 
 # WITHOUT DOCKER
