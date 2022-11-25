@@ -7,16 +7,13 @@ from datetime import timedelta
 import dj_database_url
 
 
-DEVELOPMENT_MODE =  False
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-# ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
-ALLOWED_HOSTS = 'jellyfish-app-op3p4.ondigitalocean.app'
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 DOMAIN = ('localhost:3000') 
 SITE_NAME = ('auth_test') 
@@ -88,7 +85,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 
 # WITHOUT DOCKER
-
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 if DEVELOPMENT_MODE is True:
 
