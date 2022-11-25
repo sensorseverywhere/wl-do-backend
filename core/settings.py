@@ -58,7 +58,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8009",
     "http://localhost:3000",
     "https://precious-peony-06fe9f.netlify.app",
-    "https://jellyfish-app-op3p4.ondigitalocean.app",
+    "https://jellyfish-app-op3p4.ondigitalocean.app"
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
