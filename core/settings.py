@@ -87,10 +87,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 
 # WITHOUT DOCKER
-DEVELOPMENT_MODE =  True
+DEVELOPMENT_MODE =  False
 
 if DEVELOPMENT_MODE is True:
-    print('sqlite')
+
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
